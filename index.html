@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEXORA AI Business</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0b1020;
+      color: white;
+      padding: 22px;
+    }
+    header { text-align: center; padding: 25px 0; }
+    header h1 { color: #54d6ff; font-size: 32px; }
+    header p { color: #b9c6dc; }
+    .card {
+      background: #171f35;
+      padding: 20px;
+      border-radius: 16px;
+      margin: 18px 0;
+    }
+    label { display: block; margin: 14px 0 8px; }
+    input, textarea, select {
+      width: 100%;
+      padding: 13px;
+      border-radius: 9px;
+      border: 1px solid #34415c;
+      background: #0b1020;
+      color: white;
+      font-size: 16px;
+    }
+    button {
+      width: 100%;
+      padding: 14px;
+      margin-top: 15px;
+      border: 0;
+      border-radius: 9px;
+      background: #35c8f4;
+      color: #07111f;
+      font-weight: bold;
+      font-size: 16px;
+    }
+    #resultado {
+      white-space: pre-wrap;
+      line-height: 1.6;
+      color: #e4edf9;
+    }
+    footer { text-align: center; color: #91a0b8; padding: 20px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>NEXORA AI</h1>
+    <p>Inteligência que transforma ideias em vendas.</p>
+  </header>
+
+  <section class="card">
+    <h2>Assistente de Negócios</h2>
+    <p>Prepara ideias para promover os teus produtos e serviços.</p>
+
+    <label for="negocio">Nome do negócio</label>
+    <input id="negocio" placeholder="Ex.: Souvra Business">
+
+    <label for="produto">Produto ou serviço</label>
+    <input id="produto" placeholder="Ex.: Tubos de aço">
+
+    <label for="objetivo">O que pretendes?</label>
+    <select id="objetivo">
+      <option value="anúncio">Criar um anúncio</option>
+      <option value="vendas">Melhorar as vendas</option>
+      <option value="clientes">Atrair clientes</option>
+      <option value="resposta">Responder a um cliente</option>
+    </select>
+
+    <button onclick="gerarIdeia()">Criar conteúdo</button>
+
+    <div class="card">
+      <h3>O teu resultado</h3>
+      <p id="resultado">O teu conteúdo aparecerá aqui.</p>
+      <button onclick="copiarResultado()">Copiar resultado</button>
+    </div>
+  </section>
+
+  <footer>NEXORA AI © 2026</footer>
+
+  <script>
+    function gerarIdeia() {
+      const negocio = document.getElementById("negocio").value.trim();
+      const produto = document.getElementById("produto").value.trim();
+      const objetivo = document.getElementById("objetivo").value;
+
+      if (!negocio || !produto) {
+        document.getElementById("resultado").textContent =
+          "Preenche o nome do negócio e o produto ou serviço.";
+        return;
+      }
+
+      let texto = "";
+
+      if (objetivo === "anúncio") {
+        texto = `${negocio}\n\nPrecisas de ${produto}?\n`
+          + `Temos uma solução para ti! Entra em contacto para conhecer `
+          + `as opções disponíveis e solicitar o teu orçamento.\n\n`
+          + `NEXORA AI — ideias inteligentes para o teu negócio.`;
+      } else if (objetivo === "vendas") {
+        texto = `PLANO PARA ${negocio}\n\n`
+          + `1. Identifica os clientes que precisam de ${produto}.\n`
+          + `2. Publica demonstrações e benefícios reais.\n`
+          + `3. Divulga preços ou condições de orçamento.\n`
+          + `4. Responde rapidamente às mensagens.\n`
+          + `5. Acompanha os contactos e mede as vendas.`;
+      } else if (objetivo === "clientes") {
+        texto = `COMO ATRAIR CLIENTES PARA ${negocio}\n\n`
+          + `• Mostra como ${produto} resolve um problema.\n`
+          + `• Publica fotografias ou vídeos reais.\n`
+          + `• Inclui uma chamada para pedir informações.\n`
+          + `• Partilha testemunhos verdadeiros de clientes.`;
+      } else {
+        texto = `Olá! Obrigado por contactares a ${negocio}.\n\n`
+          + `Temos todo o gosto em ajudar-te com ${produto}. `
+          + `Podes indicar a quantidade ou as características `
+          + `de que precisas para prepararmos uma resposta adequada?`;
+      }
+
+      document.getElementById("resultado").textContent = texto;
+    }
+
+    function copiarResultado() {
+      const texto = document.getElementById("resultado").textContent;
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(texto)
+          .then(() => alert("Texto copiado!"))
+          .catch(() => alert("Seleciona e copia o texto manualmente."));
+      } else {
+        alert("Seleciona e copia o texto manualmente.");
+      }
+    }
+  </script>
+</body>
+</html>
